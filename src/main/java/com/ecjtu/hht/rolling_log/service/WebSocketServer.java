@@ -3,14 +3,11 @@ package com.ecjtu.hht.rolling_log.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.text.BreakIterator;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -104,14 +101,14 @@ public class WebSocketServer {
      *
      * @param message 推送内容
      */
-    private void sendMessage(String message) throws IOException {
+    public void sendMessage(String message) throws IOException {
         this.session.getBasicRemote().sendText(message);
     }
 
     /**
      * 发送自定义消息
      */
-    private void sendCustomizeMessage(String message, @PathParam("sid") String sid) {
+    public void sendCustomizeMessage(String message, @PathParam("sid") String sid) {
         log.info("推送消息给" + sid + ",推送内容为：" + message);
         //推送给指定sid消息
         websocketSet.forEach(webSocketServer -> {
