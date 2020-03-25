@@ -1,6 +1,9 @@
-function socketConnect(sid) {
+function socketConnect() {
 
-    var socket = new WebSocket("ws://localhost:8080/websocket/" + sid);
+
+    var sid = Date.parse(new Date());
+
+    var socket = new WebSocket("ws://localhost:8081/websocket/" + sid);
 
     socket.onopen = function () {
         console.log("socket open");
@@ -8,6 +11,7 @@ function socketConnect(sid) {
     };
 
     socket.onmessage = function (message) {
+        $("#rolling").append(message.data);
         console.log(message.data);
     };
 
