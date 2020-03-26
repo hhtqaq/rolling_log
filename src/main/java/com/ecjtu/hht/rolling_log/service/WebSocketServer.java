@@ -111,14 +111,9 @@ public class WebSocketServer {
     public void sendCustomizeMessage(String message, @PathParam("sid") String sid) {
         log.info("推送消息给" + sid + ",推送内容为：" + message);
         //推送给指定sid消息
-        websocketSet.forEach(webSocketServer -> {
-            //如果为空则是群发
+        websocketSet.stream().filter(webSocketServer -> webSocketServer.sid.equals(sid)).forEach(webSocketServer -> {
             try {
-                if (StringUtils.isEmpty(sid)) {
-                    webSocketServer.sendMessage(message);
-                } else if (webSocketServer.sid.equals(sid)) {
-                    this.sendMessage(message);
-                }
+                webSocketServer.sendMessage(message);
             } catch (IOException e) {
                 log.error("推送消息 '{}' 失败", message, e);
             }

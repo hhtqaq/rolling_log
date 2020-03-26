@@ -1,5 +1,6 @@
 package com.ecjtu.hht.rolling_log.controller;
 
+import com.ecjtu.hht.rolling_log.service.ExecuteService;
 import com.ecjtu.hht.rolling_log.service.WebSocketServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class SocketController {
 
     @Autowired
+    private ExecuteService executeService;
+
+    @Autowired
     private WebSocketServer webSocketServer;
 
     @GetMapping("/socket/{cid}")
@@ -28,5 +32,16 @@ public class SocketController {
     public String pushToWeb(@PathVariable String cid, String message) {
         webSocketServer.sendCustomizeMessage(message, cid);
         return "推送成功";
+    }
+
+    /**
+     * 模拟在执行脚本  然后推送日志给前端
+     *
+     * @return
+     */
+    @GetMapping("/execute/{sid}")
+    public String execute(@PathVariable String sid) throws Exception {
+        executeService.execute(sid);
+        return "success";
     }
 }

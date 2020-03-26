@@ -4,13 +4,20 @@
     <meta charset="UTF-8">
     <title>WebSocket实现实时日志</title>
 </head>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/rolling.js}"></script>
 <body>
-<input type="button" value="执行" onclick="socketConnect()">
+<input type="button" class="btn-info" value="执行" onclick="rolling.execute()">
+<input type="button" class="btn-info" value="查看" onclick="rolling.execute()">
 
 <!--滚动日志窗口-->
 <div id="rolling" style="margin: 10%;padding:5%; border: silver 1px solid;background-color: aliceblue">
+    <div th:id="container">
 
+    </div>
 
 </div>
 

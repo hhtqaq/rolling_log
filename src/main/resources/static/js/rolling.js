@@ -1,17 +1,22 @@
-function socketConnect() {
+/**
+ * 页面加载的时候建立socket连接
+ */
+$(function () {
 
-
-    var sid = Date.parse(new Date());
-
-    var socket = new WebSocket("ws://localhost:8081/websocket/" + sid);
+    let sid = localStorage.getItem("sid");
+    if (!sid) {
+        sid = Date.parse(new Date());
+        localStorage.setItem("sid", sid);
+    }
+    const socket = new WebSocket("ws://localhost:8081/websocket/" + sid);
 
     socket.onopen = function () {
         console.log("socket open");
-        socket.send("socket open");
+        // socket.send("socket open");
     };
-
     socket.onmessage = function (message) {
-        $("#rolling").append(message.data);
+        $("#rolling").append(message.data).append("</br>");
+        $("#rolling").scrollTop()
         console.log(message.data);
     };
 
@@ -22,5 +27,17 @@ function socketConnect() {
     socket.onerror = function () {
         console.log(this.readyState);
     };
-}
+});
+
+const rolling = {};
+
+/**
+ * 执行
+ */
+rolling.execute = function () {
+    let sid = localStorage.getItem("sid");
+    $.get("/execute/" + sid);
+};
+
+
 
