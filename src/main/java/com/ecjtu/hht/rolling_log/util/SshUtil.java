@@ -15,11 +15,11 @@ public class SshUtil {
     /**
      * 远程机器IP
      */
-    private static String hostname = "192.168.1.101";
+    private static String hostname = "10.10.1.86";
     /**
      * 登录用户名
      */
-    private static String username = "sss";
+    private static String username = "root";
     /**
      * 登录密码
      */

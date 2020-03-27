@@ -10,15 +10,13 @@
 <script th:src="@{/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/rolling.js}"></script>
 <body>
-<input type="button" class="btn-info" value="执行" onclick="rolling.execute()">
-<input type="button" class="btn-info" value="查看" onclick="rolling.execute()">
+<input type="button" style="margin:50px 50% 0 50%" class="b btn-info" value="执行" onclick="rolling.execute()">
 
 <!--滚动日志窗口-->
-<div id="rolling" style="margin: 10%;padding:5%; border: silver 1px solid;background-color: aliceblue">
-    <div th:id="container">
+<div id="rolling" style="margin: 5%;padding:1%; border: silver 1px solid;background-color: ghostwhite">
+    <div th:id="container" style="height: 500px;  overflow:auto">
 
     </div>
-
 </div>
 
 </body>

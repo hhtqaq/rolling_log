@@ -73,7 +73,6 @@ public class WebSocketServer {
      */
     @OnMessage
     public void onMessage(Session session, String message) {
-        log.info("收到来自窗口" + this.sid + "的信息" + message);
         //群发消息
         websocketSet.forEach(webSocketServer -> {
             try {
@@ -109,7 +108,6 @@ public class WebSocketServer {
      * 发送自定义消息
      */
     public void sendCustomizeMessage(String message, @PathParam("sid") String sid) {
-        log.info("推送消息给" + sid + ",推送内容为：" + message);
         //推送给指定sid消息
         websocketSet.stream().filter(webSocketServer -> webSocketServer.sid.equals(sid)).forEach(webSocketServer -> {
             try {

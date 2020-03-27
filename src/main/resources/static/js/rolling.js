@@ -15,8 +15,10 @@ $(function () {
         // socket.send("socket open");
     };
     socket.onmessage = function (message) {
-        $("#rolling").append(message.data).append("</br>");
-        $("#rolling").scrollTop()
+        let $container = $("#container");
+        let $rolling = $("#rolling");
+        $container.append(message.data).append("</br>");
+        $container.scrollTop($container.height() + $container.scrollTop());
         console.log(message.data);
     };
 
